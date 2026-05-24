@@ -130,10 +130,11 @@ const HomePage = () => {
   const [imageError, setImageError] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // FIXED: Using live backend API instead of localhost
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await axios.get('http://localhost:5001/api/listings?sortBy=newest&limit=6');
+        const { data } = await axios.get('https://msa-yathu-api.onrender.com/api/listings');
         setFeaturedListings(data);
       } catch (err) {
         console.error('Failed to fetch listings:', err);
@@ -515,7 +516,6 @@ const HomePage = () => {
             className={`vd-stat vd-fade-${i + 2}`}
             style={s.statCard}
           >
-            {/* bottom reveal bar */}
             <div style={{
               position: 'absolute', bottom: 0, left: 0, right: 0, height: 2,
               background: T.goldGradient, opacity: 0,
@@ -565,12 +565,12 @@ const HomePage = () => {
             <div className="vd-spinner" />
           ) : featuredListings.length === 0 ? (
             <p style={{ textAlign: 'center', color: T.textMuted, padding: '40px 0' }}>
-              No accommodations listed yet — check back soon.
+              Loading hostels from Malawi...
             </p>
           ) : (
             <div style={s.grid3}>
               {featuredListings.map(listing => (
-                <ListingCard key={listing._id} listing={listing} />
+                <ListingCard key={listing.id || listing._id} listing={listing} />
               ))}
             </div>
           )}
@@ -612,13 +612,10 @@ const HomePage = () => {
             <SectionLabel>Meet the Builder</SectionLabel>
           </div>
           <div style={s.creatorSection}>
-            {/* Top accent line */}
             <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 1, background: T.goldGradient, opacity: .45 }} />
-            {/* Glow */}
             <div style={{ position: 'absolute', top: '-50%', right: '-10%', width: 400, height: 400, background: 'radial-gradient(ellipse,rgba(196,154,46,.07) 0%,transparent 70%)', pointerEvents: 'none' }} />
 
             <div style={s.creatorGrid}>
-              {/* Left */}
               <div style={{ textAlign: 'center' }}>
                 {!imageError ? (
                   <img
@@ -634,7 +631,6 @@ const HomePage = () => {
                 <p style={{ ...s.creatorRole, textAlign: 'center' }}>{creatorInfo.role}</p>
               </div>
 
-              {/* Right */}
               <div>
                 <p style={s.creatorBio}>{creatorInfo.bio}</p>
                 <p style={{ ...s.creatorBio, marginBottom: 28 }}>
