@@ -4,7 +4,7 @@ import { AuthProvider } from './contexts/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
 import Navbar from './components/Navbar';
 
-import AboutPage from './pages/AboutPage';
+// Pages
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
@@ -13,17 +13,13 @@ import ListingDetailPage from './pages/ListingDetailPage';
 import LandlordDashboard from './pages/LandlordDashboard';
 import AddListingPage from './pages/AddListingPage';
 import EditListingPage from './pages/EditListingPage';
-import AdminLogin from './pages/AdminLogin';
-import AdminDashboard from './pages/AdminDashboard';
-
 
 function App() {
   return (
     <Router>
       <AuthProvider>
-        <Navbar />
+        <Navbar />  {/* ONLY ONE Navbar here */}
         <Routes>
-          <Route path="/about" element={<AboutPage />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
@@ -34,8 +30,6 @@ function App() {
               <LandlordDashboard />
             </PrivateRoute>
           } />
-          <Route path="/admin" element={<AdminLogin />} />
-<Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/add-listing" element={
             <PrivateRoute allowedTypes={['landlord']}>
               <AddListingPage />
