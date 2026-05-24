@@ -25,8 +25,8 @@ if (!styleTag) {
     @keyframes fadeIn   { from { opacity:0; } to { opacity:1; } }
     @keyframes shimmer  { 0%{background-position:-600px 0} 100%{background-position:600px 0} }
     @keyframes pulseGold{
-      0%,100%{ opacity:1; transform:scale(1); box-shadow:0 0 0 0 rgba(196,154,46,.45); }
-      50%    { opacity:.85; transform:scale(1.1); box-shadow:0 0 0 7px rgba(196,154,46,0); }
+      0%,100%{ opacity:1; transform:scale(1); box-shadow:0 0 0 0 rgba(255,215,0,.45); }
+      50%    { opacity:.85; transform:scale(1.1); box-shadow:0 0 0 7px rgba(255,215,0,0); }
     }
     @keyframes spin { to { transform:rotate(360deg); } }
 
@@ -37,63 +37,85 @@ if (!styleTag) {
     .vd-fade-5{ animation:fadeUp .65s cubic-bezier(.16,1,.3,1) .57s both; }
     .vd-fadein{ animation:fadeIn .55s ease both; }
 
-    .vd-card:hover { transform:translateY(-6px) !important; }
-    .vd-stat:hover { transform:translateY(-4px) !important; }
+    .vd-card:hover { transform:translateY(-6px) !important; border-color:#FFD700 !important; }
+    .vd-stat:hover { transform:translateY(-4px) !important; border-color:#FFD700 !important; }
 
-    .vd-btn-primary:hover  { filter:brightness(1.08); box-shadow:0 10px 32px rgba(196,154,46,.42) !important; transform:translateY(-2px); }
-    .vd-btn-outline:hover  { background:rgba(196,154,46,.08) !important; border-color:#C49A2E !important; color:#E8C97A !important; transform:translateY(-2px); }
-    .vd-nav-link:hover     { color:#E8C97A !important; background:rgba(196,154,46,.08) !important; }
-    .vd-footer-link:hover  { color:#E8C97A !important; }
+    .vd-btn-primary:hover  { filter:brightness(1.08); box-shadow:0 10px 32px rgba(255,215,0,.42) !important; transform:translateY(-2px); }
+    .vd-btn-outline:hover  { background:rgba(255,215,0,.08) !important; border-color:#FFD700 !important; color:#FFD700 !important; transform:translateY(-2px); }
+    .vd-nav-link:hover     { color:#FFD700 !important; background:rgba(255,215,0,.08) !important; }
+    .vd-footer-link:hover  { color:#FFD700 !important; }
     .vd-contact-btn:hover  { filter:brightness(1.08); transform:translateY(-2px); }
-    .vd-contact-outline:hover { background:rgba(196,154,46,.1) !important; color:#E8C97A !important; transform:translateY(-2px); }
+    .vd-contact-outline:hover { background:rgba(255,215,0,.1) !important; color:#FFD700 !important; transform:translateY(-2px); }
 
     .vd-spinner {
       width:44px; height:44px; border-radius:50%;
-      border:2.5px solid rgba(196,154,46,.15);
-      border-top-color:#C49A2E;
+      border:2.5px solid rgba(255,215,0,.15);
+      border-top-color:#FFD700;
       animation:spin .9s linear infinite;
       margin:64px auto;
     }
 
-    /* Scrollbar */
+    /* Scrollbar - Yellow & Black theme */
     ::-webkit-scrollbar{ width:7px; }
-    ::-webkit-scrollbar-track{ background:#081C10; }
-    ::-webkit-scrollbar-thumb{ background:#234D33; border-radius:8px; }
-    ::-webkit-scrollbar-thumb:hover{ background:#9E7322; }
+    ::-webkit-scrollbar-track{ background:#0A0A0A; }
+    ::-webkit-scrollbar-thumb{ background:#FFD700; border-radius:8px; }
+    ::-webkit-scrollbar-thumb:hover{ background:#FFC107; }
   `;
   document.head.appendChild(s);
 }
 
-/* ─── Design tokens (mirrors theme.css variables) ─── */
+/* ─── Yellow & Black Theme Design Tokens ─── */
 const T = {
-  forestDeepest: '#081C10',
-  forestDeep:    '#0D2B18',
-  forestMid:     '#12381F',
-  forestRich:    '#1A4D2B',
-  forestAccent:  '#2E6B40',
-  goldBright:    '#D4A843',
-  goldPrimary:   '#C49A2E',
-  goldPale:      '#E8C97A',
-  goldGradient:  'linear-gradient(135deg,#E8C97A 0%,#D4A843 35%,#C49A2E 65%,#9E7322 100%)',
-  textPrimary:   '#F0EBE1',
-  textSecondary: '#B5AC9A',
-  textMuted:     '#766D5E',
-  textInverse:   '#081C10',
-  bgPrimary:     '#0A1F12',
-  bgCard:        '#0F2A18',
-  bgElevated:    '#16361F',
-  borderSubtle:  'rgba(196,154,46,.12)',
-  borderDefault: 'rgba(196,154,46,.22)',
-  borderStrong:  'rgba(196,154,46,.45)',
-  shadowGold:    '0 0 30px rgba(196,154,46,.18), 0 8px 24px rgba(0,0,0,.4)',
-  fontDisplay:   "'Cormorant Garamond', Georgia, serif",
-  fontBody:      "'DM Sans', system-ui, sans-serif",
+  // Black & Dark Colors
+  blackPure: '#000000',
+  blackDeep: '#0A0A0A',
+  blackRich: '#111111',
+  blackSoft: '#1A1A1A',
+  grayDark: '#222222',
+  grayMedium: '#2A2A2A',
+  grayLight: '#333333',
+  
+  // Yellow Colors
+  yellowBright: '#FFD700',
+  yellowPrimary: '#FFC107',
+  yellowDeep: '#FFB300',
+  yellowSoft: '#FFE082',
+  yellowPale: '#FFF8E1',
+  yellowGradient: 'linear-gradient(135deg, #FFD700 0%, #FFC107 50%, #FFB300 100%)',
+  yellowGlow: '0 0 20px rgba(255, 215, 0, 0.3)',
+  
+  // Text Colors
+  textPrimary: '#FFFFFF',
+  textSecondary: '#E0E0E0',
+  textMuted: '#A0A0A0',
+  textInverse: '#000000',
+  
+  // Backgrounds
+  bgPrimary: '#000000',
+  bgCard: '#111111',
+  bgElevated: '#1A1A1A',
+  bgHover: '#222222',
+  
+  // Borders
+  borderSubtle: 'rgba(255, 215, 0, 0.1)',
+  borderDefault: 'rgba(255, 215, 0, 0.2)',
+  borderStrong: 'rgba(255, 215, 0, 0.4)',
+  
+  // Shadows
+  shadowSm: '0 2px 4px rgba(0,0,0,0.3)',
+  shadowMd: '0 4px 6px rgba(0,0,0,0.4)',
+  shadowLg: '0 10px 15px rgba(0,0,0,0.5)',
+  shadowGold: '0 0 30px rgba(255, 215, 0, 0.15)',
+  
+  // Fonts
+  fontDisplay: "'Cormorant Garamond', Georgia, serif",
+  fontBody: "'DM Sans', system-ui, sans-serif",
 };
 
 /* ─── Reusable micro-components ─── */
 const GoldText = ({ children, style = {} }) => (
   <span style={{
-    background: T.goldGradient,
+    background: T.yellowGradient,
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
     backgroundClip: 'text',
@@ -109,11 +131,11 @@ const SectionLabel = ({ children }) => (
     padding: '6px 18px',
     border: `1px solid ${T.borderDefault}`,
     borderRadius: 9999,
-    background: 'rgba(196,154,46,.06)',
+    background: 'rgba(255,215,0,.06)',
     marginBottom: 20,
   }}>
-    <span style={{ width: 6, height: 6, borderRadius: '50%', background: T.goldPrimary, animation: 'pulseGold 2.4s ease-in-out infinite', display: 'inline-block' }} />
-    <span style={{ fontFamily: T.fontBody, fontSize: 11, fontWeight: 600, letterSpacing: '0.13em', textTransform: 'uppercase', color: T.goldPrimary }}>
+    <span style={{ width: 6, height: 6, borderRadius: '50%', background: T.yellowBright, animation: 'pulseGold 2.4s ease-in-out infinite', display: 'inline-block' }} />
+    <span style={{ fontFamily: T.fontBody, fontSize: 11, fontWeight: 600, letterSpacing: '0.13em', textTransform: 'uppercase', color: T.yellowBright }}>
       {children}
     </span>
   </div>
@@ -156,7 +178,7 @@ const HomePage = () => {
 
   const stats = [
     { value: '500+',  label: 'Properties Listed' },
-    { value: '1 000+', label: 'Students Housed' },
+    { value: '1,000+', label: 'Students Housed' },
     { value: '50+',  label: 'Verified Landlords' },
     { value: '98%',  label: 'Satisfaction Rate' },
   ];
@@ -186,7 +208,7 @@ const HomePage = () => {
     /* Nav */
     nav: {
       position: 'sticky', top: 0, zIndex: 1000,
-      background: 'rgba(10,31,18,.93)',
+      background: T.blackDeep,
       backdropFilter: 'blur(16px) saturate(1.8)',
       WebkitBackdropFilter: 'blur(16px) saturate(1.8)',
       borderBottom: `1px solid ${T.borderSubtle}`,
@@ -199,7 +221,7 @@ const HomePage = () => {
     logo: {
       fontFamily: T.fontDisplay, fontSize: 22, fontWeight: 700,
       letterSpacing: '-0.02em',
-      background: T.goldGradient,
+      background: T.yellowGradient,
       WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
       textDecoration: 'none',
     },
@@ -211,23 +233,23 @@ const HomePage = () => {
     },
     navCta: {
       marginLeft: 8, padding: '9px 22px',
-      background: T.goldGradient, color: T.textInverse,
+      background: T.yellowGradient, color: T.textInverse,
       border: 'none', borderRadius: 9999,
       fontSize: 13, fontWeight: 600, letterSpacing: '0.04em', textTransform: 'uppercase',
       cursor: 'pointer', textDecoration: 'none',
-      boxShadow: '0 4px 16px rgba(196,154,46,.3)',
+      boxShadow: '0 4px 16px rgba(255,215,0,.3)',
       transition: 'all .2s',
     },
 
     /* Hero */
     hero: {
       position: 'relative', padding: '120px 0 100px', overflow: 'hidden',
-      background: `radial-gradient(ellipse 80% 60% at 50% 0%, rgba(26,77,43,.4) 0%, transparent 70%), ${T.bgPrimary}`,
+      background: `radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,215,0,.08) 0%, transparent 70%), ${T.bgPrimary}`,
     },
     heroAccentLine: {
       position: 'absolute', bottom: 0, left: '50%', transform: 'translateX(-50%)',
       width: '55%', height: 1,
-      background: `linear-gradient(90deg,transparent,${T.goldPrimary},transparent)`,
+      background: `linear-gradient(90deg,transparent,${T.yellowBright},transparent)`,
     },
     heroInner: { maxWidth: 780, margin: '0 auto', textAlign: 'center' },
     heroEyebrow: { marginBottom: 28 },
@@ -264,7 +286,7 @@ const HomePage = () => {
     statValue: {
       fontFamily: T.fontDisplay,
       fontSize: 52, fontWeight: 700, lineHeight: 1,
-      background: T.goldGradient,
+      background: T.yellowGradient,
       WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
       display: 'block', marginBottom: 8,
     },
@@ -299,7 +321,7 @@ const HomePage = () => {
     },
     cardIcon: {
       width: 56, height: 56,
-      background: 'rgba(196,154,46,.1)',
+      background: 'rgba(255,215,0,.1)',
       border: `1px solid ${T.borderDefault}`,
       borderRadius: 14,
       display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -309,7 +331,7 @@ const HomePage = () => {
       position: 'absolute', top: 20, right: 24,
       fontFamily: T.fontDisplay,
       fontSize: 42, fontWeight: 700, lineHeight: 1,
-      background: T.goldGradient,
+      background: T.yellowGradient,
       WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
       opacity: 0.22,
     },
@@ -322,7 +344,7 @@ const HomePage = () => {
 
     /* Featured */
     featuredSection: {
-      background: T.forestDeep,
+      background: T.blackSoft,
       borderTop: `1px solid ${T.borderSubtle}`,
       borderBottom: `1px solid ${T.borderSubtle}`,
       padding: '80px 0',
@@ -341,12 +363,12 @@ const HomePage = () => {
     ctaGlow: {
       position: 'absolute', top: '-60%', left: '50%', transform: 'translateX(-50%)',
       width: 500, height: 400,
-      background: 'radial-gradient(ellipse,rgba(196,154,46,.09) 0%,transparent 70%)',
+      background: 'radial-gradient(ellipse,rgba(255,215,0,.09) 0%,transparent 70%)',
       pointerEvents: 'none',
     },
     ctaTopLine: {
       position: 'absolute', top: 0, left: 0, right: 0, height: 1,
-      background: T.goldGradient, opacity: 0.5,
+      background: T.yellowGradient, opacity: 0.5,
     },
     ctaH2: {
       fontFamily: T.fontDisplay,
@@ -360,19 +382,19 @@ const HomePage = () => {
     /* Buttons */
     btnPrimary: {
       display: 'inline-flex', alignItems: 'center', gap: 8,
-      background: T.goldGradient, color: T.textInverse,
+      background: T.yellowGradient, color: T.textInverse,
       padding: '15px 36px', border: 'none', borderRadius: 9999,
       fontFamily: T.fontBody,
       fontSize: 14, fontWeight: 600, letterSpacing: '0.04em', textTransform: 'uppercase',
       cursor: 'pointer', textDecoration: 'none',
-      boxShadow: '0 4px 16px rgba(196,154,46,.3)',
+      boxShadow: '0 4px 16px rgba(255,215,0,.3)',
       transition: 'all .2s',
     },
     btnOutline: {
       display: 'inline-flex', alignItems: 'center', gap: 8,
       background: 'transparent',
       border: `1px solid ${T.borderStrong}`,
-      color: T.goldPale,
+      color: T.yellowBright,
       padding: '14px 32px', borderRadius: 9999,
       fontFamily: T.fontBody,
       fontSize: 14, fontWeight: 500, letterSpacing: '0.04em', textTransform: 'uppercase',
@@ -396,21 +418,21 @@ const HomePage = () => {
     profileImg: {
       width: 180, height: 180, borderRadius: '50%',
       objectFit: 'cover',
-      border: `2px solid ${T.goldPrimary}`,
-      boxShadow: '0 0 0 6px rgba(196,154,46,.12)',
+      border: `2px solid ${T.yellowBright}`,
+      boxShadow: '0 0 0 6px rgba(255,215,0,.12)',
     },
     profilePlaceholder: {
       width: 180, height: 180, margin: '0 auto',
-      background: T.goldGradient,
+      background: T.yellowGradient,
       borderRadius: '50%',
       display: 'flex', alignItems: 'center', justifyContent: 'center',
       fontSize: 72,
-      boxShadow: '0 0 0 6px rgba(196,154,46,.12)',
+      boxShadow: '0 0 0 6px rgba(255,215,0,.12)',
     },
     creatorName: {
       fontFamily: T.fontDisplay,
       fontSize: 26, fontWeight: 700,
-      background: T.goldGradient,
+      background: T.yellowGradient,
       WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
       marginTop: 16, marginBottom: 4, display: 'block',
     },
@@ -428,13 +450,13 @@ const HomePage = () => {
     infoLabel: {
       fontSize: 11, fontWeight: 600,
       letterSpacing: '0.1em', textTransform: 'uppercase',
-      color: T.goldPrimary, marginBottom: 6,
+      color: T.yellowBright, marginBottom: 6,
     },
     infoValue: { fontSize: 14, color: T.textPrimary, fontWeight: 500 },
 
     /* Footer */
     footer: {
-      background: T.forestDeepest,
+      background: T.blackDeep,
       borderTop: `1px solid ${T.borderSubtle}`,
       padding: '72px 0 36px',
     },
@@ -445,7 +467,7 @@ const HomePage = () => {
     footerLogo: {
       fontFamily: T.fontDisplay,
       fontSize: 24, fontWeight: 700,
-      background: T.goldGradient,
+      background: T.yellowGradient,
       WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
       display: 'block', marginBottom: 14, textDecoration: 'none',
     },
@@ -518,7 +540,7 @@ const HomePage = () => {
           >
             <div style={{
               position: 'absolute', bottom: 0, left: 0, right: 0, height: 2,
-              background: T.goldGradient, opacity: 0,
+              background: T.yellowGradient, opacity: 0,
               transition: 'opacity .3s',
             }} />
             <span style={s.statValue}>{st.value}</span>
@@ -612,8 +634,8 @@ const HomePage = () => {
             <SectionLabel>Meet the Builder</SectionLabel>
           </div>
           <div style={s.creatorSection}>
-            <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 1, background: T.goldGradient, opacity: .45 }} />
-            <div style={{ position: 'absolute', top: '-50%', right: '-10%', width: 400, height: 400, background: 'radial-gradient(ellipse,rgba(196,154,46,.07) 0%,transparent 70%)', pointerEvents: 'none' }} />
+            <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 1, background: T.yellowGradient, opacity: .45 }} />
+            <div style={{ position: 'absolute', top: '-50%', right: '-10%', width: 400, height: 400, background: 'radial-gradient(ellipse,rgba(255,215,0,.07) 0%,transparent 70%)', pointerEvents: 'none' }} />
 
             <div style={s.creatorGrid}>
               <div style={{ textAlign: 'center' }}>
