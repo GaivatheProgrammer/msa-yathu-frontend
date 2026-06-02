@@ -96,20 +96,52 @@ if (!styleTag) {
   `;
   document.head.appendChild(s);
 }
-
+,
 const T = {
-  // Simple Light Theme
-  bgPrimary: '#FAFAFA',
-  bgCard: '#FFFFFF',
-  bgElevated: '#F5F5F5',
-  textPrimary: '#222222',
-  textSecondary: '#555555',
-  textMuted: '#888888',
-  yellowBright: '#D4AF37',
-  yellowPrimary: '#C5A028',
-  yellowGradient: 'linear-gradient(135deg, #D4AF37 0%, #C5A028 100%)',
-  borderSubtle: 'rgba(0,0,0,0.06)',
-  borderDefault: 'rgba(0,0,0,0.1)',
+  // Pure Black Background Theme
+  blackPure: '#000000',
+  blackDeep: '#000000',
+  blackRich: '#0A0A0A',
+  blackSoft: '#111111',
+  grayDark: '#1A1A1A',
+  grayMedium: '#222222',
+  grayLight: '#2A2A2A',
+  
+  // Yellow/Gold Accents
+  yellowBright: '#FFD700',
+  yellowPrimary: '#FFC107',
+  yellowDeep: '#FFB300',
+  yellowSoft: '#FFE082',
+  yellowPale: '#FFF8E1',
+  yellowGradient: 'linear-gradient(135deg, #FFD700 0%, #FFC107 50%, #FFB300 100%)',
+  yellowGlow: '0 0 20px rgba(255, 215, 0, 0.3)',
+  
+  // Text Colors
+  textPrimary: '#FFFFFF',
+  textSecondary: '#E0E0E0',
+  textMuted: '#A0A0A0',
+  textInverse: '#000000',
+  
+  // Backgrounds - ALL BLACK
+  bgPrimary: '#000000',
+  bgCard: '#0A0A0A',
+  bgElevated: '#111111',
+  bgHover: '#1A1A1A',
+  
+  // Borders
+  borderSubtle: 'rgba(255, 215, 0, 0.1)',
+  borderDefault: 'rgba(255, 215, 0, 0.15)',
+  borderStrong: 'rgba(255, 215, 0, 0.3)',
+  
+  // Shadows
+  shadowSm: '0 2px 4px rgba(0,0,0,0.5)',
+  shadowMd: '0 4px 6px rgba(0,0,0,0.6)',
+  shadowLg: '0 10px 15px rgba(0,0,0,0.7)',
+  shadowGold: '0 0 30px rgba(255, 215, 0, 0.1)',
+  
+  // Fonts
+  fontDisplay: "'Cormorant Garamond', Georgia, serif",
+  fontBody: "'DM Sans', system-ui, sans-serif",
 };
 
 const GoldText = ({ children, style = {} }) => (
