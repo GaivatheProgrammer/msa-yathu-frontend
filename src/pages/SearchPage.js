@@ -162,7 +162,7 @@ const SearchPage = () => {
       if (active.roomType)  params.append('roomType',  active.roomType);
       if (active.location)  params.append('location',  active.location);
 
-      const { data } = await axios.get(`http://localhost:5001/api/listings?${params}`);
+const { data } = await axios.get(`https://msa-yathu-api.onrender.com/api/listings?${params}`);
       setListings(data);
       setResultCount(data.length);
     } catch (err) {

@@ -217,7 +217,7 @@ const HomePage = () => {
     
     hero: { 
       position: 'relative', padding: '120px 0 100px', overflow: 'hidden', 
-      background: `radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,215,0,.05) 0%, transparent 70%), ${T.bgPrimary}` 
+      background: `radial-gradient(ellipse 80% 60% at 50% 0%, rgb(4, 4, 0) 0%, transparent 70%), ${T.bgPrimary}` 
     },
     heroAccentLine: { 
       position: 'absolute', bottom: 0, left: '50%', transform: 'translateX(-50%)', 

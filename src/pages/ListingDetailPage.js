@@ -14,7 +14,7 @@ const ListingDetailPage = () => {
 
   const fetchListing = async () => {
     try {
-      const response = await axios.get(`http://localhost:5001/api/listings/${id}`);
+      const response = await axios.get(`https://msa-yathu-api.onrender.com/api/listings/${id}`);
       setListing(response.data);
     } catch (err) {
       console.error('Error fetching listing:', err);
