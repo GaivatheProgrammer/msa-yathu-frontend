@@ -98,20 +98,19 @@ if (!styleTag) {
 }
 
 const T = {
-  // White & Gold Theme
-  bgPrimary: '#FFFFFF',
-  bgCard: '#F8F9FA',
-  bgElevated: '#FFFFFF',
-  textPrimary: '#1A1A1A',
-  textSecondary: '#4A4A4A',
+  // Simple Light Theme
+  bgPrimary: '#FAFAFA',
+  bgCard: '#FFFFFF',
+  bgElevated: '#F5F5F5',
+  textPrimary: '#222222',
+  textSecondary: '#555555',
   textMuted: '#888888',
-  yellowBright: '#FFD700',
-  yellowPrimary: '#F5A623',
-  yellowGradient: 'linear-gradient(135deg, #FFD700 0%, #F5A623 100%)',
-  borderSubtle: 'rgba(0,0,0,0.08)',
-  borderDefault: 'rgba(0,0,0,0.12)',
+  yellowBright: '#D4AF37',
+  yellowPrimary: '#C5A028',
+  yellowGradient: 'linear-gradient(135deg, #D4AF37 0%, #C5A028 100%)',
+  borderSubtle: 'rgba(0,0,0,0.06)',
+  borderDefault: 'rgba(0,0,0,0.1)',
 };
- 
 
 const GoldText = ({ children, style = {} }) => (
   <span style={{ background: T.yellowGradient, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', ...style }}>
