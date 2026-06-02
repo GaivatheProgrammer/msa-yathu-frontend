@@ -98,18 +98,20 @@ if (!styleTag) {
 }
 
 const T = {
-  blackPure: '#000000', blackDeep: '#0A0A0A', blackRich: '#111111', blackSoft: '#1A1A1A',
-  grayDark: '#222222', grayMedium: '#2A2A2A', grayLight: '#333333',
-  yellowBright: '#FFD700', yellowPrimary: '#FFC107', yellowDeep: '#FFB300',
-  yellowSoft: '#FFE082', yellowPale: '#FFF8E1',
-  yellowGradient: 'linear-gradient(135deg, #FFD700 0%, #FFC107 50%, #FFB300 100%)',
-  yellowGlow: '0 0 20px rgba(255, 215, 0, 0.3)',
-  textPrimary: '#FFFFFF', textSecondary: '#E0E0E0', textMuted: '#A0A0A0', textInverse: '#000000',
-  bgPrimary: '#000000', bgCard: '#111111', bgElevated: '#1A1A1A', bgHover: '#222222',
-  borderSubtle: 'rgba(255, 215, 0, 0.1)', borderDefault: 'rgba(255, 215, 0, 0.2)', borderStrong: 'rgba(255, 215, 0, 0.4)',
-  shadowSm: '0 2px 4px rgba(0,0,0,0.3)', shadowMd: '0 4px 6px rgba(0,0,0,0.4)', shadowLg: '0 10px 15px rgba(0,0,0,0.5)', shadowGold: '0 0 30px rgba(255, 215, 0, 0.15)',
-  fontDisplay: "'Cormorant Garamond', Georgia, serif", fontBody: "'DM Sans', system-ui, sans-serif",
+  // White & Gold Theme
+  bgPrimary: '#FFFFFF',
+  bgCard: '#F8F9FA',
+  bgElevated: '#FFFFFF',
+  textPrimary: '#1A1A1A',
+  textSecondary: '#4A4A4A',
+  textMuted: '#888888',
+  yellowBright: '#FFD700',
+  yellowPrimary: '#F5A623',
+  yellowGradient: 'linear-gradient(135deg, #FFD700 0%, #F5A623 100%)',
+  borderSubtle: 'rgba(0,0,0,0.08)',
+  borderDefault: 'rgba(0,0,0,0.12)',
 };
+ 
 
 const GoldText = ({ children, style = {} }) => (
   <span style={{ background: T.yellowGradient, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', ...style }}>
