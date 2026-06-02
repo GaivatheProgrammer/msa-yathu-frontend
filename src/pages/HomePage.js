@@ -55,6 +55,11 @@ if (!styleTag) {
       margin:64px auto;
     }
 
+    /* Black Background Theme */
+    body {
+      background-color: #000000 !important;
+    }
+
     /* Responsive Styles */
     @media (max-width: 1024px) {
       .container { padding: 0 20px; }
@@ -90,31 +95,26 @@ if (!styleTag) {
     }
 
     ::-webkit-scrollbar{ width:7px; }
-    ::-webkit-scrollbar-track{ background:#0A0A0A; }
+    ::-webkit-scrollbar-track{ background:#000000; }
     ::-webkit-scrollbar-thumb{ background:#FFD700; border-radius:8px; }
     ::-webkit-scrollbar-thumb:hover{ background:#FFC107; }
   `;
   document.head.appendChild(s);
 }
-,
+
+/* ─── Black Background Theme Design Tokens ─── */
 const T = {
-  // Pure Black Background Theme
-  blackPure: '#000000',
-  blackDeep: '#000000',
-  blackRich: '#0A0A0A',
-  blackSoft: '#111111',
-  grayDark: '#1A1A1A',
-  grayMedium: '#222222',
-  grayLight: '#2A2A2A',
+  // Pure Black Background
+  bgPrimary: '#000000',
+  bgCard: '#0A0A0A',
+  bgElevated: '#111111',
+  bgHover: '#1A1A1A',
   
   // Yellow/Gold Accents
   yellowBright: '#FFD700',
   yellowPrimary: '#FFC107',
   yellowDeep: '#FFB300',
-  yellowSoft: '#FFE082',
-  yellowPale: '#FFF8E1',
   yellowGradient: 'linear-gradient(135deg, #FFD700 0%, #FFC107 50%, #FFB300 100%)',
-  yellowGlow: '0 0 20px rgba(255, 215, 0, 0.3)',
   
   // Text Colors
   textPrimary: '#FFFFFF',
@@ -122,22 +122,10 @@ const T = {
   textMuted: '#A0A0A0',
   textInverse: '#000000',
   
-  // Backgrounds - ALL BLACK
-  bgPrimary: '#000000',
-  bgCard: '#0A0A0A',
-  bgElevated: '#111111',
-  bgHover: '#1A1A1A',
-  
   // Borders
   borderSubtle: 'rgba(255, 215, 0, 0.1)',
   borderDefault: 'rgba(255, 215, 0, 0.15)',
   borderStrong: 'rgba(255, 215, 0, 0.3)',
-  
-  // Shadows
-  shadowSm: '0 2px 4px rgba(0,0,0,0.5)',
-  shadowMd: '0 4px 6px rgba(0,0,0,0.6)',
-  shadowLg: '0 10px 15px rgba(0,0,0,0.7)',
-  shadowGold: '0 0 30px rgba(255, 215, 0, 0.1)',
   
   // Fonts
   fontDisplay: "'Cormorant Garamond', Georgia, serif",
@@ -145,16 +133,25 @@ const T = {
 };
 
 const GoldText = ({ children, style = {} }) => (
-  <span style={{ background: T.yellowGradient, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', ...style }}>
+  <span style={{
+    background: T.yellowGradient,
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
+    ...style,
+  }}>
     {children}
   </span>
 );
 
 const SectionLabel = ({ children }) => (
-  <div style={{ 
-    display: 'inline-flex', alignItems: 'center', gap: 8, 
-    padding: '6px 18px', border: `1px solid ${T.borderDefault}`, 
-    borderRadius: 9999, background: 'rgba(255,215,0,.06)', marginBottom: 20 
+  <div style={{
+    display: 'inline-flex', alignItems: 'center', gap: 8,
+    padding: '6px 18px',
+    border: `1px solid ${T.borderDefault}`,
+    borderRadius: 9999,
+    background: 'rgba(255,215,0,.06)',
+    marginBottom: 20,
   }}>
     <span style={{ width: 6, height: 6, borderRadius: '50%', background: T.yellowBright, animation: 'pulseGold 2.4s ease-in-out infinite', display: 'inline-block' }} />
     <span style={{ fontFamily: T.fontBody, fontSize: 11, fontWeight: 600, letterSpacing: '0.13em', textTransform: 'uppercase', color: T.yellowBright }}>
@@ -163,7 +160,9 @@ const SectionLabel = ({ children }) => (
   </div>
 );
 
-const Divider = () => (<div style={{ height: 1, background: `linear-gradient(90deg,transparent,${T.borderDefault},transparent)`, margin: '80px 0' }} />);
+const Divider = () => (
+  <div style={{ height: 1, background: `linear-gradient(90deg,transparent,${T.borderDefault},transparent)`, margin: '80px 0' }} />
+);
 
 const HomePage = () => {
   const [featuredListings, setFeaturedListings] = useState([]);
@@ -184,8 +183,11 @@ const HomePage = () => {
   }, []);
 
   const creatorInfo = {
-    name: 'Gaiva', role: 'Founder & Full Stack Developer',
-    email: 'Whitedaniel381@gmail.com', phone: '0886606571', location: 'Zomba, UNIMA, Malawi',
+    name: 'Gaiva',
+    role: 'Founder & Full Stack Developer',
+    email: 'Whitedaniel381@gmail.com',
+    phone: '0886606571',
+    location: 'Zomba, UNIMA, Malawi',
     bio: 'Passionate software developer from Malawi dedicated to solving student accommodation challenges across the country.',
     mission: 'To connect students with safe, affordable housing near their universities.',
   };
@@ -215,7 +217,7 @@ const HomePage = () => {
     
     hero: { 
       position: 'relative', padding: '120px 0 100px', overflow: 'hidden', 
-      background: `radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,215,0,.08) 0%, transparent 70%), ${T.bgPrimary}` 
+      background: `radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,215,0,.05) 0%, transparent 70%), ${T.bgPrimary}` 
     },
     heroAccentLine: { 
       position: 'absolute', bottom: 0, left: '50%', transform: 'translateX(-50%)', 
@@ -234,13 +236,11 @@ const HomePage = () => {
     
     statsWrap: { 
       display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 20, 
-      margin: '0 auto 80px', maxWidth: 1240, padding: '0 28px',
-      '@media (max-width: 768px)': { gridTemplateColumns: 'repeat(2, 1fr)' },
-      '@media (max-width: 480px)': { gridTemplateColumns: '1fr' }
+      margin: '0 auto 80px', maxWidth: 1240, padding: '0 28px'
     },
     statCard: { 
       background: T.bgCard, border: `1px solid ${T.borderSubtle}`, borderRadius: 18, 
-      padding: '36px 20px', textAlign: 'center', transition: 'all .25s cubic-bezier(.16,1,.3,1)', 
+      padding: '36px 20px', textAlign: 'center', transition: 'all .25s', 
       cursor: 'default', position: 'relative', overflow: 'hidden' 
     },
     statValue: { 
@@ -260,13 +260,11 @@ const HomePage = () => {
     
     grid3: { 
       display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 28,
-      '@media (max-width: 1024px)': { gap: 20 },
       '@media (max-width: 768px)': { gridTemplateColumns: '1fr' }
     },
     card: { 
       background: T.bgCard, border: `1px solid ${T.borderSubtle}`, borderRadius: 20, 
-      padding: '44px 32px', position: 'relative', overflow: 'hidden', 
-      transition: 'all .3s cubic-bezier(.16,1,.3,1)' 
+      padding: '44px 32px', position: 'relative', overflow: 'hidden', transition: 'all .3s' 
     },
     cardIcon: { 
       width: 56, height: 56, background: 'rgba(255,215,0,.1)', border: `1px solid ${T.borderDefault}`, 
@@ -286,7 +284,7 @@ const HomePage = () => {
     cardP: { fontSize: 'clamp(14px, 1.5vw, 15px)', lineHeight: 1.75, color: T.textSecondary },
     
     featuredSection: { 
-      background: T.blackSoft, borderTop: `1px solid ${T.borderSubtle}`, 
+      background: T.bgElevated, borderTop: `1px solid ${T.borderSubtle}`, 
       borderBottom: `1px solid ${T.borderSubtle}`, padding: '60px 0' 
     },
     
@@ -297,7 +295,7 @@ const HomePage = () => {
     },
     ctaGlow: { 
       position: 'absolute', top: '-60%', left: '50%', transform: 'translateX(-50%)', 
-      width: 500, height: 400, background: 'radial-gradient(ellipse,rgba(255,215,0,.09) 0%,transparent 70%)', 
+      width: 500, height: 400, background: 'radial-gradient(ellipse,rgba(255,215,0,.05) 0%,transparent 70%)', 
       pointerEvents: 'none' 
     },
     ctaTopLine: { 
@@ -359,7 +357,7 @@ const HomePage = () => {
     },
     infoValue: { fontSize: 'clamp(12px, 1.5vw, 14px)', color: T.textPrimary, fontWeight: 500 },
     
-    footer: { background: T.blackDeep, borderTop: `1px solid ${T.borderSubtle}`, padding: '72px 0 36px' },
+    footer: { background: T.bgPrimary, borderTop: `1px solid ${T.borderSubtle}`, padding: '72px 0 36px' },
     footerGrid: { 
       display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 48, marginBottom: 56,
       '@media (max-width: 768px)': { gridTemplateColumns: '1fr', gap: 32 }
@@ -409,11 +407,10 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* STATS - Fully Responsive */}
+      {/* STATS */}
       <div style={{ ...s.statsWrap, marginTop: -44 }}>
         {stats.map((st, i) => (
           <div key={st.label} className={`vd-stat vd-fade-${i + 2}`} style={s.statCard}>
-            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 2, background: T.yellowGradient, opacity: 0, transition: 'opacity .3s' }} />
             <span style={s.statValue}>{st.value}</span>
             <span style={s.statLabel}>{st.label}</span>
           </div>
@@ -423,7 +420,7 @@ const HomePage = () => {
       <div style={s.wrap}>
         <Divider />
         
-        {/* HOW IT WORKS - Fully Responsive */}
+        {/* HOW IT WORKS */}
         <section>
           <div style={s.sectionHead}>
             <SectionLabel>Simple Process</SectionLabel>
@@ -445,7 +442,7 @@ const HomePage = () => {
         <Divider />
       </div>
 
-      {/* FEATURED LISTINGS - Fully Responsive */}
+      {/* FEATURED LISTINGS */}
       <section style={s.featuredSection}>
         <div style={s.wrap}>
           <div style={s.sectionHead}>
@@ -491,14 +488,14 @@ const HomePage = () => {
 
         <Divider />
 
-        {/* CREATOR SECTION - Fully Responsive */}
+        {/* CREATOR SECTION */}
         <section>
           <div style={{ textAlign: 'center', marginBottom: 48 }}>
             <SectionLabel>Meet the Builder</SectionLabel>
           </div>
           <div style={s.creatorSection}>
             <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 1, background: T.yellowGradient, opacity: .45 }} />
-            <div style={{ position: 'absolute', top: '-50%', right: '-10%', width: 400, height: 400, background: 'radial-gradient(ellipse,rgba(255,215,0,.07) 0%,transparent 70%)', pointerEvents: 'none' }} />
+            <div style={{ position: 'absolute', top: '-50%', right: '-10%', width: 400, height: 400, background: 'radial-gradient(ellipse,rgba(255,215,0,.05) 0%,transparent 70%)', pointerEvents: 'none' }} />
             <div style={s.creatorGrid}>
               <div style={{ textAlign: 'center' }}>
                 {!imageError ? (
@@ -544,7 +541,7 @@ const HomePage = () => {
         </div>
       </div>
 
-      {/* FOOTER - Fully Responsive */}
+      {/* FOOTER */}
       <footer style={s.footer}>
         <div style={s.wrap}>
           <div style={s.footerGrid}>
