@@ -4,7 +4,7 @@ import axios from 'axios';
 import SearchBar from '../components/SearchBar';
 import ListingCard from '../components/ListingCard';
 
-
+/* ─── Google Fonts injected once ─── */
 const fontLink = document.getElementById('verdant-fonts');
 if (!fontLink) {
   const link = document.createElement('link');
@@ -15,7 +15,7 @@ if (!fontLink) {
   document.head.appendChild(link);
 }
 
-
+/* ─── Keyframe animations injected once ─── */
 const styleTag = document.getElementById('verdant-styles');
 if (!styleTag) {
   const s = document.createElement('style');
@@ -55,6 +55,40 @@ if (!styleTag) {
       margin:64px auto;
     }
 
+    /* Responsive Styles */
+    @media (max-width: 1024px) {
+      .container { padding: 0 20px; }
+    }
+    
+    @media (max-width: 768px) {
+      .vd-fade-1, .vd-fade-2, .vd-fade-3, .vd-fade-4, .vd-fade-5 {
+        animation: none !important;
+        opacity: 1 !important;
+      }
+      
+      [style*="grid-template-columns: repeat(3, 1fr)"] {
+        grid-template-columns: 1fr !important;
+      }
+      
+      [style*="grid-template-columns: repeat(4, 1fr)"] {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+      
+      .hero h1 {
+        font-size: 32px !important;
+      }
+      
+      .hero p {
+        font-size: 16px !important;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      [style*="grid-template-columns: repeat(2, 1fr)"] {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
     ::-webkit-scrollbar{ width:7px; }
     ::-webkit-scrollbar-track{ background:#0A0A0A; }
     ::-webkit-scrollbar-thumb{ background:#FFD700; border-radius:8px; }
@@ -72,7 +106,7 @@ const T = {
   yellowGlow: '0 0 20px rgba(255, 215, 0, 0.3)',
   textPrimary: '#FFFFFF', textSecondary: '#E0E0E0', textMuted: '#A0A0A0', textInverse: '#000000',
   bgPrimary: '#000000', bgCard: '#111111', bgElevated: '#1A1A1A', bgHover: '#222222',
-  borderSubtle: 'rgba(13, 11, 2, 0.1)', borderDefault: 'rgba(255, 215, 0, 0.2)', borderStrong: 'rgba(255, 215, 0, 0.4)',
+  borderSubtle: 'rgba(255, 215, 0, 0.1)', borderDefault: 'rgba(255, 215, 0, 0.2)', borderStrong: 'rgba(255, 215, 0, 0.4)',
   shadowSm: '0 2px 4px rgba(0,0,0,0.3)', shadowMd: '0 4px 6px rgba(0,0,0,0.4)', shadowLg: '0 10px 15px rgba(0,0,0,0.5)', shadowGold: '0 0 30px rgba(255, 215, 0, 0.15)',
   fontDisplay: "'Cormorant Garamond', Georgia, serif", fontBody: "'DM Sans', system-ui, sans-serif",
 };
@@ -84,9 +118,15 @@ const GoldText = ({ children, style = {} }) => (
 );
 
 const SectionLabel = ({ children }) => (
-  <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 18px', border: `1px solid ${T.borderDefault}`, borderRadius: 9999, background: 'rgba(255,215,0,.06)', marginBottom: 20 }}>
+  <div style={{ 
+    display: 'inline-flex', alignItems: 'center', gap: 8, 
+    padding: '6px 18px', border: `1px solid ${T.borderDefault}`, 
+    borderRadius: 9999, background: 'rgba(255,215,0,.06)', marginBottom: 20 
+  }}>
     <span style={{ width: 6, height: 6, borderRadius: '50%', background: T.yellowBright, animation: 'pulseGold 2.4s ease-in-out infinite', display: 'inline-block' }} />
-    <span style={{ fontFamily: T.fontBody, fontSize: 11, fontWeight: 600, letterSpacing: '0.13em', textTransform: 'uppercase', color: T.yellowBright }}>{children}</span>
+    <span style={{ fontFamily: T.fontBody, fontSize: 11, fontWeight: 600, letterSpacing: '0.13em', textTransform: 'uppercase', color: T.yellowBright }}>
+      {children}
+    </span>
   </div>
 );
 
@@ -139,56 +179,182 @@ const HomePage = () => {
   const s = {
     page: { fontFamily: T.fontBody, background: T.bgPrimary, color: T.textPrimary, minHeight: '100vh' },
     wrap: { maxWidth: 1240, margin: '0 auto', padding: '0 28px' },
-    hero: { position: 'relative', padding: '120px 0 100px', overflow: 'hidden', background: `radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,215,0,.08) 0%, transparent 70%), ${T.bgPrimary}` },
-    heroAccentLine: { position: 'absolute', bottom: 0, left: '50%', transform: 'translateX(-50%)', width: '55%', height: 1, background: `linear-gradient(90deg,transparent,${T.yellowBright},transparent)` },
+    
+    hero: { 
+      position: 'relative', padding: '120px 0 100px', overflow: 'hidden', 
+      background: `radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,215,0,.08) 0%, transparent 70%), ${T.bgPrimary}` 
+    },
+    heroAccentLine: { 
+      position: 'absolute', bottom: 0, left: '50%', transform: 'translateX(-50%)', 
+      width: '55%', height: 1, background: `linear-gradient(90deg,transparent,${T.yellowBright},transparent)` 
+    },
     heroInner: { maxWidth: 780, margin: '0 auto', textAlign: 'center' },
     heroEyebrow: { marginBottom: 28 },
-    heroH1: { fontFamily: T.fontDisplay, fontSize: 'clamp(40px,6.5vw,76px)', fontWeight: 700, lineHeight: 1.05, letterSpacing: '-0.03em', color: T.textPrimary, marginBottom: 24 },
-    heroSub: { fontSize: 18, fontWeight: 300, lineHeight: 1.75, color: T.textSecondary, marginBottom: 44 },
-    statsWrap: { display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 20, margin: '0 auto 80px', maxWidth: 1240, padding: '0 28px' },
-    statCard: { background: T.bgCard, border: `1px solid ${T.borderSubtle}`, borderRadius: 18, padding: '36px 20px', textAlign: 'center', transition: 'all .25s cubic-bezier(.16,1,.3,1)', cursor: 'default', position: 'relative', overflow: 'hidden' },
-    statValue: { fontFamily: T.fontDisplay, fontSize: 52, fontWeight: 700, lineHeight: 1, background: T.yellowGradient, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', display: 'block', marginBottom: 8 },
-    statLabel: { fontSize: 12, fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: T.textMuted },
-    section: { padding: '80px 0' },
+    heroH1: { 
+      fontFamily: T.fontDisplay, fontSize: 'clamp(32px, 6.5vw, 76px)', fontWeight: 700, 
+      lineHeight: 1.05, letterSpacing: '-0.03em', color: T.textPrimary, marginBottom: 24 
+    },
+    heroSub: { 
+      fontSize: 'clamp(16px, 2vw, 18px)', fontWeight: 300, lineHeight: 1.75, 
+      color: T.textSecondary, marginBottom: 44 
+    },
+    
+    statsWrap: { 
+      display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 20, 
+      margin: '0 auto 80px', maxWidth: 1240, padding: '0 28px',
+      '@media (max-width: 768px)': { gridTemplateColumns: 'repeat(2, 1fr)' },
+      '@media (max-width: 480px)': { gridTemplateColumns: '1fr' }
+    },
+    statCard: { 
+      background: T.bgCard, border: `1px solid ${T.borderSubtle}`, borderRadius: 18, 
+      padding: '36px 20px', textAlign: 'center', transition: 'all .25s cubic-bezier(.16,1,.3,1)', 
+      cursor: 'default', position: 'relative', overflow: 'hidden' 
+    },
+    statValue: { 
+      fontFamily: T.fontDisplay, fontSize: 'clamp(36px, 5vw, 52px)', fontWeight: 700, lineHeight: 1, 
+      background: T.yellowGradient, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', 
+      backgroundClip: 'text', display: 'block', marginBottom: 8 
+    },
+    statLabel: { fontSize: 'clamp(10px, 2vw, 12px)', fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: T.textMuted },
+    
+    section: { padding: '60px 0' },
     sectionHead: { textAlign: 'center', marginBottom: 56 },
-    sectionH2: { fontFamily: T.fontDisplay, fontSize: 'clamp(28px,4vw,48px)', fontWeight: 700, letterSpacing: '-0.025em', color: T.textPrimary, marginBottom: 14 },
-    sectionP: { fontSize: 17, fontWeight: 300, color: T.textSecondary },
-    grid3: { display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 28 },
-    card: { background: T.bgCard, border: `1px solid ${T.borderSubtle}`, borderRadius: 20, padding: '44px 32px', position: 'relative', overflow: 'hidden', transition: 'all .3s cubic-bezier(.16,1,.3,1)' },
-    cardIcon: { width: 56, height: 56, background: 'rgba(255,215,0,.1)', border: `1px solid ${T.borderDefault}`, borderRadius: 14, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 26, marginBottom: 24 },
-    stepBadge: { position: 'absolute', top: 20, right: 24, fontFamily: T.fontDisplay, fontSize: 42, fontWeight: 700, lineHeight: 1, background: T.yellowGradient, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', opacity: 0.22 },
-    cardH3: { fontFamily: T.fontDisplay, fontSize: 24, fontWeight: 700, color: T.textPrimary, marginBottom: 12 },
-    cardP: { fontSize: 15, lineHeight: 1.75, color: T.textSecondary },
-    featuredSection: { background: T.blackSoft, borderTop: `1px solid ${T.borderSubtle}`, borderBottom: `1px solid ${T.borderSubtle}`, padding: '80px 0' },
-    ctaSection: { background: T.bgCard, border: `1px solid ${T.borderDefault}`, borderRadius: 24, padding: '72px 56px', textAlign: 'center', position: 'relative', overflow: 'hidden', marginBottom: 80 },
-    ctaGlow: { position: 'absolute', top: '-60%', left: '50%', transform: 'translateX(-50%)', width: 500, height: 400, background: 'radial-gradient(ellipse,rgba(255,215,0,.09) 0%,transparent 70%)', pointerEvents: 'none' },
-    ctaTopLine: { position: 'absolute', top: 0, left: 0, right: 0, height: 1, background: T.yellowGradient, opacity: 0.5 },
-    ctaH2: { fontFamily: T.fontDisplay, fontSize: 'clamp(26px,4vw,44px)', fontWeight: 700, color: T.textPrimary, marginBottom: 14, position: 'relative' },
-    ctaP: { fontSize: 17, fontWeight: 300, color: T.textSecondary, marginBottom: 36, position: 'relative' },
-    btnOutline: { display: 'inline-flex', alignItems: 'center', gap: 8, background: 'transparent', border: `1px solid ${T.borderStrong}`, color: T.yellowBright, padding: '14px 32px', borderRadius: 9999, fontFamily: T.fontBody, fontSize: 14, fontWeight: 500, letterSpacing: '0.04em', textTransform: 'uppercase', cursor: 'pointer', textDecoration: 'none', transition: 'all .2s' },
-    creatorSection: { background: T.bgCard, border: `1px solid ${T.borderDefault}`, borderRadius: 24, padding: '60px', marginBottom: 80, position: 'relative', overflow: 'hidden' },
-    creatorGrid: { display: 'grid', gridTemplateColumns: '220px 1fr', gap: 56, alignItems: 'start' },
-    profileImg: { width: 180, height: 180, borderRadius: '50%', objectFit: 'cover', border: `2px solid ${T.yellowBright}`, boxShadow: '0 0 0 6px rgba(255,215,0,.12)' },
-    profilePlaceholder: { width: 180, height: 180, margin: '0 auto', background: T.yellowGradient, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 72, boxShadow: '0 0 0 6px rgba(255,215,0,.12)' },
-    creatorName: { fontFamily: T.fontDisplay, fontSize: 26, fontWeight: 700, background: T.yellowGradient, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', marginTop: 16, marginBottom: 4, display: 'block' },
-    creatorRole: { fontSize: 13, color: T.textMuted, letterSpacing: '0.04em' },
-    creatorBio: { fontSize: 16, lineHeight: 1.8, color: T.textSecondary, marginBottom: 20 },
-    infoGrid: { display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: 16, marginBottom: 28 },
-    infoItem: { background: T.bgElevated, border: `1px solid ${T.borderSubtle}`, borderRadius: 12, padding: '14px 18px' },
-    infoLabel: { fontSize: 11, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: T.yellowBright, marginBottom: 6 },
-    infoValue: { fontSize: 14, color: T.textPrimary, fontWeight: 500 },
+    sectionH2: { 
+      fontFamily: T.fontDisplay, fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 700, 
+      letterSpacing: '-0.025em', color: T.textPrimary, marginBottom: 14 
+    },
+    sectionP: { fontSize: 'clamp(15px, 2vw, 17px)', fontWeight: 300, color: T.textSecondary },
+    
+    grid3: { 
+      display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 28,
+      '@media (max-width: 1024px)': { gap: 20 },
+      '@media (max-width: 768px)': { gridTemplateColumns: '1fr' }
+    },
+    card: { 
+      background: T.bgCard, border: `1px solid ${T.borderSubtle}`, borderRadius: 20, 
+      padding: '44px 32px', position: 'relative', overflow: 'hidden', 
+      transition: 'all .3s cubic-bezier(.16,1,.3,1)' 
+    },
+    cardIcon: { 
+      width: 56, height: 56, background: 'rgba(255,215,0,.1)', border: `1px solid ${T.borderDefault}`, 
+      borderRadius: 14, display: 'flex', alignItems: 'center', justifyContent: 'center', 
+      fontSize: 26, marginBottom: 24 
+    },
+    stepBadge: { 
+      position: 'absolute', top: 20, right: 24, fontFamily: T.fontDisplay, 
+      fontSize: 'clamp(32px, 5vw, 42px)', fontWeight: 700, lineHeight: 1, 
+      background: T.yellowGradient, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', 
+      backgroundClip: 'text', opacity: 0.22 
+    },
+    cardH3: { 
+      fontFamily: T.fontDisplay, fontSize: 'clamp(20px, 3vw, 24px)', fontWeight: 700, 
+      color: T.textPrimary, marginBottom: 12 
+    },
+    cardP: { fontSize: 'clamp(14px, 1.5vw, 15px)', lineHeight: 1.75, color: T.textSecondary },
+    
+    featuredSection: { 
+      background: T.blackSoft, borderTop: `1px solid ${T.borderSubtle}`, 
+      borderBottom: `1px solid ${T.borderSubtle}`, padding: '60px 0' 
+    },
+    
+    ctaSection: { 
+      background: T.bgCard, border: `1px solid ${T.borderDefault}`, borderRadius: 24, 
+      padding: 'clamp(40px, 5vw, 72px) clamp(24px, 5vw, 56px)', textAlign: 'center', 
+      position: 'relative', overflow: 'hidden', marginBottom: 80 
+    },
+    ctaGlow: { 
+      position: 'absolute', top: '-60%', left: '50%', transform: 'translateX(-50%)', 
+      width: 500, height: 400, background: 'radial-gradient(ellipse,rgba(255,215,0,.09) 0%,transparent 70%)', 
+      pointerEvents: 'none' 
+    },
+    ctaTopLine: { 
+      position: 'absolute', top: 0, left: 0, right: 0, height: 1, background: T.yellowGradient, opacity: 0.5 
+    },
+    ctaH2: { 
+      fontFamily: T.fontDisplay, fontSize: 'clamp(26px, 4vw, 44px)', fontWeight: 700, 
+      color: T.textPrimary, marginBottom: 14, position: 'relative' 
+    },
+    ctaP: { 
+      fontSize: 'clamp(15px, 2vw, 17px)', fontWeight: 300, color: T.textSecondary, 
+      marginBottom: 36, position: 'relative' 
+    },
+    
+    btnOutline: { 
+      display: 'inline-flex', alignItems: 'center', gap: 8, background: 'transparent', 
+      border: `1px solid ${T.borderStrong}`, color: T.yellowBright, padding: '14px 32px', 
+      borderRadius: 9999, fontFamily: T.fontBody, fontSize: 14, fontWeight: 500, 
+      letterSpacing: '0.04em', textTransform: 'uppercase', cursor: 'pointer', 
+      textDecoration: 'none', transition: 'all .2s' 
+    },
+    
+    creatorSection: { 
+      background: T.bgCard, border: `1px solid ${T.borderDefault}`, borderRadius: 24, 
+      padding: 'clamp(32px, 4vw, 60px)', marginBottom: 80, position: 'relative', overflow: 'hidden' 
+    },
+    creatorGrid: { 
+      display: 'grid', gridTemplateColumns: 'clamp(180px, 25vw, 220px) 1fr', gap: 56, alignItems: 'start',
+      '@media (max-width: 768px)': { gridTemplateColumns: '1fr', textAlign: 'center', gap: 32 }
+    },
+    profileImg: { 
+      width: 'clamp(140px, 20vw, 180px)', height: 'clamp(140px, 20vw, 180px)', 
+      borderRadius: '50%', objectFit: 'cover', border: `2px solid ${T.yellowBright}`, 
+      boxShadow: '0 0 0 6px rgba(255,215,0,.12)' 
+    },
+    profilePlaceholder: { 
+      width: 'clamp(140px, 20vw, 180px)', height: 'clamp(140px, 20vw, 180px)', margin: '0 auto', 
+      background: T.yellowGradient, borderRadius: '50%', display: 'flex', alignItems: 'center', 
+      justifyContent: 'center', fontSize: 'clamp(48px, 8vw, 72px)', 
+      boxShadow: '0 0 0 6px rgba(255,215,0,.12)' 
+    },
+    creatorName: { 
+      fontFamily: T.fontDisplay, fontSize: 'clamp(22px, 3vw, 26px)', fontWeight: 700, 
+      background: T.yellowGradient, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', 
+      backgroundClip: 'text', marginTop: 16, marginBottom: 4, display: 'block' 
+    },
+    creatorRole: { fontSize: 'clamp(12px, 1.5vw, 13px)', color: T.textMuted, letterSpacing: '0.04em' },
+    creatorBio: { fontSize: 'clamp(14px, 1.5vw, 16px)', lineHeight: 1.8, color: T.textSecondary, marginBottom: 20 },
+    infoGrid: { 
+      display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16, marginBottom: 28,
+      '@media (max-width: 480px)': { gridTemplateColumns: '1fr' }
+    },
+    infoItem: { 
+      background: T.bgElevated, border: `1px solid ${T.borderSubtle}`, borderRadius: 12, padding: '14px 18px' 
+    },
+    infoLabel: { 
+      fontSize: 11, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', 
+      color: T.yellowBright, marginBottom: 6 
+    },
+    infoValue: { fontSize: 'clamp(12px, 1.5vw, 14px)', color: T.textPrimary, fontWeight: 500 },
+    
     footer: { background: T.blackDeep, borderTop: `1px solid ${T.borderSubtle}`, padding: '72px 0 36px' },
-    footerGrid: { display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 48, marginBottom: 56 },
-    footerLogo: { fontFamily: T.fontDisplay, fontSize: 24, fontWeight: 700, background: T.yellowGradient, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', display: 'block', marginBottom: 14, textDecoration: 'none' },
+    footerGrid: { 
+      display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 48, marginBottom: 56,
+      '@media (max-width: 768px)': { gridTemplateColumns: '1fr', gap: 32 }
+    },
+    footerLogo: { 
+      fontFamily: T.fontDisplay, fontSize: 24, fontWeight: 700, background: T.yellowGradient, 
+      WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', 
+      display: 'block', marginBottom: 14, textDecoration: 'none' 
+    },
     footerTagline: { fontSize: 14, lineHeight: 1.75, color: T.textMuted, maxWidth: 240 },
-    footerColHead: { fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: T.textMuted, marginBottom: 20 },
-    footerLink: { display: 'block', fontSize: 14, color: T.textSecondary, textDecoration: 'none', marginBottom: 12, transition: 'color .15s' },
-    footerBottom: { borderTop: `1px solid ${T.borderSubtle}`, paddingTop: 28, display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: 13, color: T.textMuted },
+    footerColHead: { 
+      fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', 
+      color: T.textMuted, marginBottom: 20 
+    },
+    footerLink: { 
+      display: 'block', fontSize: 14, color: T.textSecondary, textDecoration: 'none', 
+      marginBottom: 12, transition: 'color .15s' 
+    },
+    footerBottom: { 
+      borderTop: `1px solid ${T.borderSubtle}`, paddingTop: 28, display: 'flex', 
+      alignItems: 'center', justifyContent: 'space-between', fontSize: 13, color: T.textMuted,
+      '@media (max-width: 768px)': { flexDirection: 'column', gap: 16, textAlign: 'center' }
+    },
   };
 
   return (
     <div style={s.page}>
-      {/* HERO SECTION - NO NAVBAR HERE */}
+      {/* HERO SECTION */}
       <section style={s.hero}>
         <div style={s.heroAccentLine} />
         <div style={{ ...s.wrap, textAlign: 'center' }}>
@@ -210,7 +376,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* STATS */}
+      {/* STATS - Fully Responsive */}
       <div style={{ ...s.statsWrap, marginTop: -44 }}>
         {stats.map((st, i) => (
           <div key={st.label} className={`vd-stat vd-fade-${i + 2}`} style={s.statCard}>
@@ -223,6 +389,8 @@ const HomePage = () => {
 
       <div style={s.wrap}>
         <Divider />
+        
+        {/* HOW IT WORKS - Fully Responsive */}
         <section>
           <div style={s.sectionHead}>
             <SectionLabel>Simple Process</SectionLabel>
@@ -240,10 +408,11 @@ const HomePage = () => {
             ))}
           </div>
         </section>
+
         <Divider />
       </div>
 
-      {/* FEATURED LISTINGS */}
+      {/* FEATURED LISTINGS - Fully Responsive */}
       <section style={s.featuredSection}>
         <div style={s.wrap}>
           <div style={s.sectionHead}>
@@ -251,11 +420,15 @@ const HomePage = () => {
             <h2 style={s.sectionH2}>Featured Properties</h2>
             <p style={s.sectionP}>Hand-picked accommodations near Malawian universities</p>
           </div>
-          {loading ? (<div className="vd-spinner" />) : featuredListings.length === 0 ? (<p style={{ textAlign: 'center', color: T.textMuted, padding: '40px 0' }}>Loading hostels from Malawi...</p>) : (
+          
+          {loading ? (<div className="vd-spinner" />) : featuredListings.length === 0 ? (
+            <p style={{ textAlign: 'center', color: T.textMuted, padding: '40px 0' }}>Loading hostels from Malawi...</p>
+          ) : (
             <div style={s.grid3}>
               {featuredListings.map(listing => (<ListingCard key={listing.id || listing._id} listing={listing} />))}
             </div>
           )}
+          
           <div style={{ textAlign: 'center', marginTop: 48 }}>
             <Link to="/search" className="vd-btn-outline" style={s.btnOutline}>Browse All Properties →</Link>
           </div>
@@ -264,6 +437,8 @@ const HomePage = () => {
 
       <div style={s.wrap}>
         <Divider />
+        
+        {/* WHY CHOOSE US */}
         <section>
           <div style={s.sectionHead}>
             <SectionLabel>Why Choose Us</SectionLabel>
@@ -280,17 +455,24 @@ const HomePage = () => {
             ))}
           </div>
         </section>
+
         <Divider />
 
-        {/* CREATOR SECTION */}
+        {/* CREATOR SECTION - Fully Responsive */}
         <section>
-          <div style={{ textAlign: 'center', marginBottom: 48 }}><SectionLabel>Meet the Builder</SectionLabel></div>
+          <div style={{ textAlign: 'center', marginBottom: 48 }}>
+            <SectionLabel>Meet the Builder</SectionLabel>
+          </div>
           <div style={s.creatorSection}>
             <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 1, background: T.yellowGradient, opacity: .45 }} />
             <div style={{ position: 'absolute', top: '-50%', right: '-10%', width: 400, height: 400, background: 'radial-gradient(ellipse,rgba(255,215,0,.07) 0%,transparent 70%)', pointerEvents: 'none' }} />
             <div style={s.creatorGrid}>
               <div style={{ textAlign: 'center' }}>
-                {!imageError ? (<img src="/images/gaiva-photo.jpg" alt={creatorInfo.name} style={s.profileImg} onError={() => setImageError(true)} />) : (<div style={s.profilePlaceholder}>👨‍💻</div>)}
+                {!imageError ? (
+                  <img src="/images/gaiva-photo.jpg" alt={creatorInfo.name} style={s.profileImg} onError={() => setImageError(true)} />
+                ) : (
+                  <div style={s.profilePlaceholder}>👨‍💻</div>
+                )}
                 <span style={s.creatorName}>{creatorInfo.name}</span>
                 <p style={{ ...s.creatorRole, textAlign: 'center' }}>{creatorInfo.role}</p>
               </div>
@@ -304,10 +486,13 @@ const HomePage = () => {
                     { label: '📍 Location', value: creatorInfo.location },
                     { label: '💬 WhatsApp', value: 'Available 24 / 7' },
                   ].map(item => (
-                    <div key={item.label} style={s.infoItem}><div style={s.infoLabel}>{item.label}</div><div style={s.infoValue}>{item.value}</div></div>
+                    <div key={item.label} style={s.infoItem}>
+                      <div style={s.infoLabel}>{item.label}</div>
+                      <div style={s.infoValue}>{item.value}</div>
+                    </div>
                   ))}
                 </div>
-                <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', justifyContent: 'flex-start' }}>
                   <a href={`mailto:${creatorInfo.email}`} style={{ ...s.btnOutline, textDecoration: 'none' }}>📧 Send Email</a>
                   <a href={`tel:${creatorInfo.phone}`} style={{ ...s.btnOutline, textDecoration: 'none' }}>📞 Call Now</a>
                 </div>
@@ -316,7 +501,7 @@ const HomePage = () => {
           </div>
         </section>
 
-        {/* CTA */}
+        {/* CTA SECTION */}
         <div style={s.ctaSection}>
           <div style={s.ctaGlow} /><div style={s.ctaTopLine} />
           <SectionLabel>For Landlords</SectionLabel>
@@ -326,16 +511,35 @@ const HomePage = () => {
         </div>
       </div>
 
-      {/* FOOTER */}
+      {/* FOOTER - Fully Responsive */}
       <footer style={s.footer}>
         <div style={s.wrap}>
           <div style={s.footerGrid}>
-            <div><Link to="/" style={s.footerLogo}>MSA Yathu</Link><p style={s.footerTagline}>Your trusted platform for student accommodation across Malawi.</p></div>
-            <div><p style={s.footerColHead}>Explore</p>{[['/', 'Home'], ['/search', 'Browse'], ['/register', 'Register']].map(([to, l]) => (<Link key={to} to={to} style={s.footerLink}>{l}</Link>))}</div>
-            <div><p style={s.footerColHead}>Support</p>{['Help Center', 'FAQ', 'Contact'].map(l => (<a key={l} href="#" style={s.footerLink}>{l}</a>))}</div>
-            <div><p style={s.footerColHead}>Contact</p>{[`📧 ${creatorInfo.email}`, `📱 ${creatorInfo.phone}`, `📍 ${creatorInfo.location}`].map(line => (<p key={line} style={{ ...s.footerTagline, marginBottom: 10 }}>{line}</p>))}</div>
+            <div>
+              <Link to="/" style={s.footerLogo}>MSA Yathu</Link>
+              <p style={s.footerTagline}>Your trusted platform for student accommodation across Malawi.</p>
+            </div>
+            <div>
+              <p style={s.footerColHead}>Explore</p>
+              {[['/', 'Home'], ['/search', 'Browse'], ['/register', 'Register']].map(([to, l]) => (
+                <Link key={to} to={to} style={s.footerLink}>{l}</Link>
+              ))}
+            </div>
+            <div>
+              <p style={s.footerColHead}>Support</p>
+              {['Help Center', 'FAQ', 'Contact'].map(l => (<a key={l} href="#" style={s.footerLink}>{l}</a>))}
+            </div>
+            <div>
+              <p style={s.footerColHead}>Contact</p>
+              {[`📧 ${creatorInfo.email}`, `📱 ${creatorInfo.phone}`, `📍 ${creatorInfo.location}`].map(line => (
+                <p key={line} style={{ ...s.footerTagline, marginBottom: 10 }}>{line}</p>
+              ))}
+            </div>
           </div>
-          <div style={s.footerBottom}><span>© 2024 MSA Yathu. All rights reserved.</span><span>Created with ❤️ by {creatorInfo.name} · {creatorInfo.location}</span></div>
+          <div style={s.footerBottom}>
+            <span>© 2024 MSA Yathu. All rights reserved.</span>
+            <span>Created with ❤️ by {creatorInfo.name} · {creatorInfo.location}</span>
+          </div>
         </div>
       </footer>
     </div>
