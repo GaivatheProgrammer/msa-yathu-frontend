@@ -58,83 +58,167 @@ const RegisterPage = () => {
     const result = await register(userData);
     
     if (result.success) {
+      // ✅ SUCCESS - Redirect to homepage
       navigate('/');
     } else {
-      setError(result.error);
+      setError(result.error || 'Registration failed. Please try again.');
     }
     setLoading(false);
   };
 
   const universities = [
-    'University of Malawi',
-    'Mzuzu University',
-    'Lilongwe University of Agriculture and Natural Resources',
-    'Malawi University of Science and Technology',
-    'Malawi University of Business and Applied Sciences'
+    'University of Malawi (UNIMA)',
+    'Mzuzu University (MZUNI)',
+    'Lilongwe University of Agriculture and Natural Resources (LUANAR)',
+    'Malawi University of Science and Technology (MUST)',
+    'Malawi University of Business and Applied Sciences (MUBAS)',
+    'Kamuzu University of Health Sciences (KUHeS)'
   ];
 
-  return (
-    <div className="container" style={{ 
-      minHeight: 'calc(100vh - 80px)', 
-      padding: '40px 20px'
-    }}>
-      <div className="card" style={{ maxWidth: '550px', width: '100%', margin: '0 auto', padding: '40px' }}>
-        <div style={{ textAlign: 'center', marginBottom: '30px' }}>
-          <div style={{ fontSize: '48px', marginBottom: '10px' }}>📝</div>
-          <h2 style={{ color: '#333', marginBottom: '10px' }}>Create an Account</h2>
-          <p style={{ color: '#666' }}>Join our community today</p>
-        </div>
+  const styles = {
+    container: {
+      minHeight: 'calc(100vh - 80px)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '40px 20px',
+      background: '#000000',
+    },
+    card: {
+      maxWidth: '550px',
+      width: '100%',
+      background: '#0A0A0A',
+      borderRadius: '24px',
+      padding: '40px',
+      border: '1px solid rgba(255,215,0,0.2)',
+    },
+    title: {
+      fontSize: '32px',
+      fontWeight: '700',
+      color: '#FFFFFF',
+      marginBottom: '8px',
+      textAlign: 'center',
+    },
+    subtitle: {
+      color: '#A0A0A0',
+      textAlign: 'center',
+      marginBottom: '32px',
+    },
+    inputGroup: {
+      marginBottom: '20px',
+    },
+    label: {
+      display: 'block',
+      marginBottom: '8px',
+      color: '#CCCCCC',
+      fontSize: '14px',
+      fontWeight: '500',
+    },
+    input: {
+      width: '100%',
+      padding: '12px 16px',
+      background: '#1A1A1A',
+      border: '1px solid #2A2A2A',
+      borderRadius: '8px',
+      color: '#FFFFFF',
+      fontSize: '16px',
+    },
+    select: {
+      width: '100%',
+      padding: '12px 16px',
+      background: '#1A1A1A',
+      border: '1px solid #2A2A2A',
+      borderRadius: '8px',
+      color: '#FFFFFF',
+      fontSize: '16px',
+    },
+    button: {
+      width: '100%',
+      background: 'linear-gradient(135deg, #FFD700 0%, #FFC107 100%)',
+      color: '#000000',
+      padding: '14px',
+      border: 'none',
+      borderRadius: '8px',
+      fontSize: '16px',
+      fontWeight: '600',
+      cursor: 'pointer',
+      marginTop: '10px',
+    },
+    errorAlert: {
+      background: 'rgba(244, 67, 54, 0.1)',
+      border: '1px solid #F44336',
+      borderRadius: '8px',
+      padding: '12px',
+      color: '#F44336',
+      marginBottom: '20px',
+      textAlign: 'center',
+    },
+    link: {
+      color: '#FFD700',
+      textDecoration: 'none',
+    },
+    registerLink: {
+      textAlign: 'center',
+      marginTop: '20px',
+      color: '#A0A0A0',
+    }
+  };
 
-        {error && (
-          <div className="alert alert-error">
-            ❌ {error}
-          </div>
-        )}
+  return (
+    <div style={styles.container}>
+      <div style={styles.card}>
+        <h1 style={styles.title}>Create Account</h1>
+        <p style={styles.subtitle}>Join MSA Yathu today</p>
+
+        {error && <div style={styles.errorAlert}>{error}</div>}
 
         <form onSubmit={handleSubmit}>
-          <div className="input-group">
-            <label>Full Name</label>
+          <div style={styles.inputGroup}>
+            <label style={styles.label}>Full Name</label>
             <input
               type="text"
               name="name"
               value={formData.name}
               onChange={handleChange}
               required
-              placeholder="Daniel Gaiva White"
+              style={styles.input}
+              placeholder="Enter your full name"
             />
           </div>
 
-          <div className="input-group">
-            <label>Email Address</label>
+          <div style={styles.inputGroup}>
+            <label style={styles.label}>Email Address</label>
             <input
               type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
               required
-              placeholder="Whitedaniel381@gmail.com"
+              style={styles.input}
+              placeholder="you@example.com"
             />
           </div>
 
-          <div className="input-group">
-            <label>Phone Number</label>
+          <div style={styles.inputGroup}>
+            <label style={styles.label}>Phone Number</label>
             <input
               type="tel"
               name="phone"
               value={formData.phone}
               onChange={handleChange}
               required
-              placeholder="0886606571"
+              style={styles.input}
+              placeholder="0888 123 456"
             />
           </div>
 
-          <div className="input-group">
-            <label>I am a:</label>
+          <div style={styles.inputGroup}>
+            <label style={styles.label}>I am a:</label>
             <select
               name="userType"
               value={formData.userType}
               onChange={handleChange}
-              required
+              style={styles.select}
             >
               <option value="student">Student looking for accommodation</option>
               <option value="landlord">Landlord with property to rent</option>
@@ -142,13 +226,14 @@ const RegisterPage = () => {
           </div>
 
           {formData.userType === 'student' && (
-            <div className="input-group">
-              <label>University</label>
+            <div style={styles.inputGroup}>
+              <label style={styles.label}>University</label>
               <select
                 name="university"
                 value={formData.university}
                 onChange={handleChange}
                 required
+                style={styles.select}
               >
                 <option value="">Select your university</option>
                 {universities.map((uni, index) => (
@@ -159,60 +244,54 @@ const RegisterPage = () => {
           )}
 
           {formData.userType === 'landlord' && (
-            <div className="input-group">
-              <label>Property Information</label>
+            <div style={styles.inputGroup}>
+              <label style={styles.label}>Property Information</label>
               <textarea
                 name="propertyInfo"
                 value={formData.propertyInfo}
                 onChange={handleChange}
                 required
                 rows="3"
-                placeholder="Describe your properties or portfolio..."
+                style={styles.input}
+                placeholder="Describe your properties..."
               />
             </div>
           )}
 
-          <div className="input-group">
-            <label>Password</label>
+          <div style={styles.inputGroup}>
+            <label style={styles.label}>Password</label>
             <input
               type="password"
               name="password"
               value={formData.password}
               onChange={handleChange}
               required
+              style={styles.input}
               placeholder="Minimum 6 characters"
             />
           </div>
 
-          <div className="input-group">
-            <label>Confirm Password</label>
+          <div style={styles.inputGroup}>
+            <label style={styles.label}>Confirm Password</label>
             <input
               type="password"
               name="confirmPassword"
               value={formData.confirmPassword}
               onChange={handleChange}
               required
+              style={styles.input}
               placeholder="Confirm your password"
             />
           </div>
 
-          <button 
-            type="submit" 
-            className="btn-primary" 
-            style={{ width: '100%' }}
-            disabled={loading}
-          >
+          <button type="submit" style={styles.button} disabled={loading}>
             {loading ? 'Creating account...' : 'Register'}
           </button>
         </form>
 
-        <div style={{ marginTop: '20px', textAlign: 'center' }}>
-          <p style={{ color: '#666' }}>
-            Already have an account?{' '}
-            <Link to="/login" style={{ color: '#667eea', textDecoration: 'none', fontWeight: 'bold' }}>
-              Login here
-            </Link>
-          </p>
+        <div style={styles.registerLink}>
+          Already have an account?{' '}
+          <Link to="/login" style={styles.link}>Login here</Link>
         </div>
       </div>
     </div>
