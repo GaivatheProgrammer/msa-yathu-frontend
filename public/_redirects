@@ -1,2 +1,5 @@
+# Allow images to load properly
+/images/* /images/:splat 200
 
-/*    /index.html   200
+# React Router fallback
+/* /index.html 200
